@@ -14,11 +14,10 @@ class Product
 
 class ProductGrouper
 {
-	public $products = [];
-
-	public function group(Array $products)
+	public function group(array $products): array
 	{
 		$brandTypes = [];
+		$groupedProducts = [];
 
 		foreach ($products as $product) {
 			if (!$product instanceof Product) {
@@ -26,18 +25,43 @@ class ProductGrouper
 			}
 
 			if (!isset($product->brand)) {
-				$product->brand = ''
+				$product->brand = '';
+			}
 
-			$brandTypes[$product->brand] = [$product->type = 1];
+			$brandTypes[$product->brand][] = $product->type;
 		}
+
+		foreach ($brandTypes as $brand => $types) {
+			sort($types);
+			$brandTypes[$brand] = $types;
+		}
+
+		ksort($brandTypes);
+
+		foreach ($brandTypes as $brand => $types) {
+			foreach($types as $type) {
+				$groupedProducts[] = new Product($brand, $type);
+			}
+		}
+
+		return $groupedProducts;
 	}
 }
 
-$product = new Product("hello", "world");
-
-echo $product->brand;
-echo $product->type;
-
+$product = new Product("b", "2");
+$products[] = $product;
+$product = new Product("b", "1");
+$products[] = $product;
+$product = new Product("a", "2");
+$products[] = $product;
+$product = new Product("a", "1");
+$products[] = $product;
+$product = new Product("a", "3");
 $products[] = $product;
 
-$productGrouper = new ProductGrouper($products);
+
+
+$productGrouper = new ProductGrouper();
+$grouped = $productGrouper->group($products);
+print_r($grouped);
+
