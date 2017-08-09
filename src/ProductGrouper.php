@@ -1,9 +1,19 @@
 <?php
+
+/**
+* A simple class that represents a product
+*/
 class Product
 {
 	public $brand;
 	public $type;
 
+	/**
+	* Constructor for product
+	*
+	* @param string $brand
+	* @param string $type
+	*/
 	public function __construct(string $brand, string $type)
 	{
 		$this->brand = $brand;
@@ -11,8 +21,20 @@ class Product
 	}
 }
 
+/**
+* A class that is used to group an array of products
+*/
 class ProductGrouper
 {
+	/**
+	* Method that groups an array of prodducts
+	*
+	* Method will sort the array of products by brand and by type within brand order
+	*
+	* @param array $products
+	*
+	* @return array the array of sorted products
+	*/
 	public function group(array $products): array
 	{
 		$brandTypes = [];
