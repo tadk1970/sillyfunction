@@ -1,5 +1,4 @@
 <?php
-
 class Product
 {
 	public $brand;
@@ -47,21 +46,3 @@ class ProductGrouper
 		return $groupedProducts;
 	}
 }
-
-$product = new Product("b", "2");
-$products[] = $product;
-$product = new Product("b", "1");
-$products[] = $product;
-$product = new Product("a", "2");
-$products[] = $product;
-$product = new Product("a", "1");
-$products[] = $product;
-$product = new Product("a", "3");
-$products[] = $product;
-
-
-
-$productGrouper = new ProductGrouper();
-$grouped = $productGrouper->group($products);
-print_r($grouped);
-
